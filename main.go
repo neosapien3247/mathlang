@@ -8,8 +8,6 @@ import (
 )
 
 func main() {
-	syntax := "/usr/local/share/mathlang/syntax_regexp.json"
-args:
 	if os.Args[1] == "-" {
 		scanner := bufio.NewScanner(os.Stdin)
 		math := ""
@@ -42,9 +40,6 @@ args:
 	} else if os.Args[1] == "-e" {
 		math := strings.Join(os.Args[2:], " ")
 		output(math)
-	} else if os.Args[1] == "-s" {
-		syntax = os.Args[2]
-		goto args
 	} else {
 		printHelp()
 	}

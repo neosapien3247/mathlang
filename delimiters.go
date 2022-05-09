@@ -31,7 +31,7 @@ func findDelimiters(txt string) (delims []int) {
 
 func smartReplace(math string) (s string) {
 	s = ""
-	if len(math) < 3 {
+	if len(math) < 2 {
 		panic("string too short!")
 	} else {
 		if math[1] == '$' {

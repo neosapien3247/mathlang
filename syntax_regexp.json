@@ -1,7 +1,7 @@
 {
     "function": "(ln|log|cos|tan|sec|csc|cot|arg|lim|sqrt|root|arccos|sum|int|prod|arcsin|arctan|exp|min|max|sinh|cosh|tanh|sup|det)",
     "logic"   : "(exists|forall|(s)*in([^a-z]|$)|cup|empty|cap|and|or|not|subset|subseteq|notin)",
-    "letters" : "(alpha|Alpha|beta|Beta|gamma|Gamma|delta|Delta|varepsilon|epsilon|Epsilon|zeta|Zeta|eta|Eta|theta|Theta|iota|Iota|kappa|Kappa|lambda|Lamda|mu|Mu|nu|Nu|chi|Chi|upsilon|Upsilon|psi|Psi|xi|Xi|omega|Omega|varphi|phi|Phi|aleph|beth|gimmel)",
+    "letters" : "(alpha|Alpha|beta|Beta|gamma|Gamma|delta|Delta|varepsilon|epsilon|Epsilon|zeta|Zeta|eta|Eta|theta|Theta|iota|Iota|kappa|Kappa|lambda|Lamda|mu|Mu|nu|Nu|chi|Chi|upsilon|Upsilon|psi|Psi|[^e]xi|Xi|omega|Omega|varphi|phi|Phi|aleph|beth|gimmel)",
     "shape"   : "({[^}]+}|\\S+)\\^{(_|->|\\.|~|\\^)}",
     "frac"    : "(\\S+|})/({|\\S+)",
     "mathbb"  : "(N|Z|D|Q|R|C|U|P|K){2}",

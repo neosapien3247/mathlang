@@ -60,8 +60,8 @@ func replaceKeywords(math string) (s string) {
 	}
 
 	addBackslash("FunctionRegexp")
-	addBackslash("LetterRegexp")
 	addBackslash("LogicRegexp")
+	addBackslash("LetterRegexp")
 
 	inf, err2 := regexp.Compile("inf")
 	check(err2)
@@ -77,8 +77,8 @@ func replaceKeywords(math string) (s string) {
 func replaceFrac(math string) (s string) {
 	// check for '/' in text
 	hasFractions := func(txt string) (bool, int) {
-		for i := 0; i < len(txt); i++ {
-			if txt[i] == '/' {
+		for i := 1; i < len(txt)-1; i++ {
+			if txt[i] == '/' && txt[i-1] != ' ' && txt[i+1] != ' ' {
 				return true, i
 			}
 		}
