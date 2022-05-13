@@ -17,6 +17,7 @@ func replace(math string) (s string) {
 	corrected = replaceKeywords(corrected)
 	corrected = replaceFrac(corrected)
 	corrected = replaceParnethesis(corrected)
+	corrected = replacePipe(corrected)
 	corrected = replaceShape(corrected)
 	corrected = replaceSymbol(corrected)
 	corrected = replaceText(corrected)
@@ -253,11 +254,43 @@ func replaceParnethesis(math string) (s string) {
 
 	replBr("(", ")")
 	replBr("[", "]")
+
 	s += fmt.Sprintf(corrected)
 	return
 }
 
-// Symbol transforms
+func replacePipe(math string) (s string) {
+
+	corrected := math
+	pipe := "|"
+
+	// first do it for doubles '||'
+	Dleft, Derr := regexp.Compile("(\\s|^)\\" + pipe + "\\" + pipe + "(\\S)")
+	Dright, Derr2 := regexp.Compile("(\\S)\\" + pipe + "\\" + pipe + "(\\s|$)")
+	check(Derr)
+	check(Derr2)
+	corrected = Dleft.ReplaceAllString(corrected, " \\left"+pipe+"\\left"+pipe+"$2")
+	corrected = Dright.ReplaceAllString(corrected, "$1"+"\\right"+pipe+"\\right"+pipe+" ")
+
+	// then for singles '|'
+	left, err := regexp.Compile("(\\s|^)\\" + pipe + "(\\S)")
+	right, err2 := regexp.Compile("(\\S)\\" + pipe + "(\\s|$)")
+	check(err)
+	check(err2)
+	corrected = left.ReplaceAllString(corrected, " \\left"+pipe+"$2")
+	corrected = right.ReplaceAllString(corrected, "$1"+"\\right"+pipe+" ")
+
+	// a final correction is needed (this is a bit of a hack really)
+	// because the double will match '...text|| ' to '...text\right|\right| '
+	//and then the single will match '\right| ' to '\right\right| '
+
+	//thus we will remove all instances of '\right\right| ' and replace them with '\right| '
+
+	corrected = strings.ReplaceAll(corrected, "\\right\\right| ", "\\right| ")
+
+	s += fmt.Sprintf(corrected)
+	return
+} // Symbol transforms
 // will change "=>" to "\implies" for example
 func replaceSymbol(math string) (s string) {
 	s = math
