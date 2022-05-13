@@ -254,6 +254,7 @@ func replaceParnethesis(math string) (s string) {
 
 	replBr("(", ")")
 	replBr("[", "]")
+	replBr("\\{", "\\}")
 
 	s += fmt.Sprintf(corrected)
 	return

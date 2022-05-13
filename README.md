@@ -130,6 +130,27 @@ Parenthesis are already chosen to be the size-adjusting type, wether you need th
 \left(a+b\right)
 ```
 
+Also note that this works for pipes `|` but with specific rules:
+1. pipes that are surrounded by whitespace do not get changed and stay as `|`
+2. if pipes are stuck only on one side to non whitespace they get changed
+3. if there is no whitespace the pipes will not be changed.
+
+```
+5 + |-3| = 8
+```
+
+```latex
+5 + \left|-3\right| = 8
+```
+
+```
+\{ x^2 | x in RR \}
+```
+
+```latex
+\left\{ x^2 | x \in \mathbb{R} \right\}
+```
+
 ### Simple, memorable shortcuts
 
 ```
