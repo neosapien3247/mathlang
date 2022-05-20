@@ -404,6 +404,9 @@ func replaceMatrix(math string) (s string) {
 	s = math[0:starts[0]]
 	for i := 0; i < len(starts); i++ {
 		s += repl(starts[i], ends[i])
+		if i < len(starts)-1 {
+			s += math[ends[i]:starts[i+1]]
+		}
 	}
 	if len(math) > ends[len(ends)-1]+1 {
 		s += math[ends[len(ends)-1]+1:]
