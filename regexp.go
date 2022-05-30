@@ -8,6 +8,7 @@ import (
 	"regexp"
 )
 
+// fetches the regexp strings from "syntax_regexp.json" file
 func DefaultMathRegexp() (def map[string]*regexp.Regexp) {
 
 	bkpJSONFile := "syntax_regexp.json"

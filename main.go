@@ -47,11 +47,11 @@ func main() {
 
 func check(err error) {
 	if err != nil {
-
 		panic(err)
 	}
 }
 
+// delim here refers to wether to only parse between delimiters or not
 func output(math string, delim ...bool) {
 	// delim is taken to be false by default
 	if len(delim) > 0 {
