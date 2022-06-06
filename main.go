@@ -14,15 +14,14 @@ func main() {
 		for scanner.Scan() {
 			math += scanner.Text() + "\n"
 		}
-		output(math)
+		fmt.Print(translate(math))
 	} else if os.Args[1] == "-d" {
-
 		scanner := bufio.NewScanner(os.Stdin)
 		math := ""
 		for scanner.Scan() {
 			math += scanner.Text() + "\n"
 		}
-		output(math, true)
+		fmt.Print(translate(math, true))
 	} else if os.Args[1] == "-f" || os.Args[1] == "-fd" || os.Args[1] == "-df" {
 		file, err := os.Open(os.Args[2])
 		check(err)
@@ -33,35 +32,38 @@ func main() {
 		}
 		fmt.Println(math)
 		if os.Args[1] == "-fd" || os.Args[1] == "-df" {
-			output(math, true)
+			fmt.Print(translate(math, true))
 		} else {
-			output(math)
+			fmt.Print(translate(math))
 		}
 	} else if os.Args[1] == "-e" {
 		math := strings.Join(os.Args[2:], " ")
-		output(math)
+		fmt.Print(translate(math))
 	} else {
 		printHelp()
 	}
 }
 
-func check(err error) {
-	if err != nil {
-		panic(err)
+func check(err ...error) {
+	for _, e := range err {
+		if e != nil {
+			panic(e)
+		}
 	}
 }
 
 // delim here refers to wether to only parse between delimiters or not
-func output(math string, delim ...bool) {
+func translate(txt string, delim ...bool) String {
+	math := String(txt)
 	// delim is taken to be false by default
 	if len(delim) > 0 {
 		if delim[0] {
-			fmt.Print(replaceBetweenDelimiters(math))
+			return replaceBetweenDelimiters(math)
 		} else {
-			fmt.Printf(replace(math))
+			return replace(math)
 		}
 	} else {
-		fmt.Printf(replace(math))
+		return replace(math)
 	}
 }
 
@@ -73,7 +75,7 @@ func printHelp() {
 -e [expression]	: translates expression to LaTeX math
 -               : reads from stdin
 -d              : reads from stdin only in delimiters ($math$ or $$math$$)
--f [file]       : reads from file and outputs to stdout
--df / -fd [file]: reads from file and outputs to stdout only in delimiters
+-f [file]       : reads from file and translates to stdout
+-df / -fd [file]: reads from file and translates to stdout only in delimiters
 		`)
 }
