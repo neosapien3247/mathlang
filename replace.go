@@ -72,8 +72,7 @@ Replacing Methods for `String`
 // Replace fonts
 // i.e add latex "mathbb" or "mathcal" prefixes to certain matches
 func (math String) replaceFont() String {
-	def := DefaultMathRegexp()
-	return math.regexpReplace(def["MathbbRegexp"], "\\mathbb{$1}").regexpReplace(def["MathcalRegexp"], "\\mathcal{$1}")
+	return math.regexpDefReplace("MathbbRegexp", "\\mathbb{$1}").regexpDefReplace("MathcalRegexp", "\\mathcal{$1}")
 }
 
 // Prepend with "\"
